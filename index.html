@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssurWare</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>Transform Your Insurance workflow</h1>
+    <button class="cta">Watch demo</button>
+    <div class="panel">
+        <img src="img/stats.svg" alt="logo"  id="stats"/>
+        <p id="paragraph">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            id explicabo. </p>
+        <div class="box"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>
+    <script>
+        document.querySelector(".cta").addEventListener('click', (event) => {
+            gsap.to('.panel', 1.5, {scaleY: 1, opacity: 1, height: '100vh'});
+            gsap.to('#stats', 1, { y:0, opacity: 1, delay: 1, ease: "elastic.out(1, 0.3)"});
+            gsap.to('#paragraph', 1, {opacity: 1, delay: 1.4, y: 20});
+            gsap.to('.box', 3, {opacity: 1, y: 0,  scale: 1, ease: "elastic.out(1, 0.3)"});
+        })
+    </script>
+</body>
+</html>
