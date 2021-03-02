@@ -10,21 +10,85 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <h1>Transform Your Insurance workflow</h1>
-    <button class="cta">Watch demo</button>
+    <h1>Welcome to the playground</h1>
+    <button class="cta">Read Rules</button>
     <div class="panel">
-        <img src="img/stats.svg" alt="logo"  id="stats"/>
-        <p id="paragraph">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            id explicabo. </p>
+        <img src="img/rules.svg" alt="logo"  id="stats"/>
+        <p id="paragraph">
+            - Rule to follow <br/>
+            - Another rule to follow
+        </p>
+        <button id="play">Play Now</button>
         <div class="box"></div>
+        <div id="game" style="display: none;"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js" integrity="sha512-1dalHDkG9EtcOmCnoCjiwQ/HEB5SDNqw8d4G2MKoNwjiwMNeBAkudsBCmSlMnXdsH8Bm0mOd3tl/6nL5y0bMaQ==" crossorigin="anonymous"></script>
+    <script src="js/lottie.js"></script>
     <script>
+                var elem = document.getElementById('game');
+        var animData = {
+            container: elem,
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid meet',
+            },
+            path: 'js/data.json',
+            audioFactory: createAudio,
+        };
+        // lottie.setQuality('low');
+        // anim.setSpeed(23)
+        var anim = lottie.loadAnimation(animData);
+
+        anim.setSubframe(false);
+
+        anim.onError = function(errorType, nativeError, errorProps) {
+            console.log(errorType)
+        }
+
+        anim.addEventListener('error', function(error) {
+            console.log(error)
+        })
+
+        // setTimeout(()=>anim.destroy(), 1000);
+
+        function createAudio(assetPath) {
+            return new Howl({
+                src: [assetPath]
+            })
+        }
+
+        let direction = 1;
+        elem.addEventListener('click', event => {
+            //  toggle the click
+            // mouve hover
+            anim.setDirection(direction);
+            anim.play();
+            direction = -direction;
+            // anim.setSpeed(10)
+        })
+        // cta
         document.querySelector(".cta").addEventListener('click', (event) => {
+            // be sure the game is hidden
+            gsap.to('#game', 0, {opacity: 0, scale: 0, display: 'none', ease: "elastic.in(1, 0.3)"});
+            //
             gsap.to('.panel', 1.5, {scaleY: 1, opacity: 1, height: '100vh'});
             gsap.to('#stats', 1, { y:0, opacity: 1, delay: 1, ease: "elastic.out(1, 0.3)"});
             gsap.to('#paragraph', 1, {opacity: 1, delay: 1.4, y: 20});
             gsap.to('.box', 3, {opacity: 1, y: 0,  scale: 1, ease: "elastic.out(1, 0.3)"});
+            gsap.to('#play', 1, {opacity: 1, delay: 1.4});
+        });
+
+        document.querySelector('#play').addEventListener('click', (event) => {
+            gsap.to('#stats', 1, {y: -200, opacity: 0, delay: "elastic.in(1, 0.3)" });
+            gsap.to('#paragraph', 1, {opacity: 0, ease: "elastic.in(1, 0.3)", y: -20});
+            gsap.to('.box', 1, {opacity: 0, y: 0,  scale: 0, ease: "elastic.in(1, 0.3)"});
+            gsap.to('#game', 1, {opacity: 1, scale: 1, delay: 1.5, display: 'block', ease: "elastic.out(1, 0.3)"});
+            gsap.to('#play', 1, {opacity: 0}); // hide play btn
+            setTimeout(() => {
+                anim.play();
+            }, 2500)
         })
     </script>
 </body>

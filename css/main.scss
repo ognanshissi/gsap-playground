@@ -23,6 +23,10 @@ button{
     font-size: 1.7em;
     padding: .5em 1em;
     cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .panel {
@@ -48,6 +52,16 @@ button{
         opacity: 0;
     }
 
+    #play {
+        background: none;
+        border: 2px solid #000;
+        font-weight: bold;
+        font-size: 1.7em;
+        padding: .5em 1em;
+        cursor: pointer;
+        opacity: 0;
+    }
+
     .box {
         border: 5px solid rgb(223, 224, 224);
         position: absolute;
@@ -58,6 +72,16 @@ button{
         opacity: 0;
         z-index: -1;
         transform: scale(0);
+    }
+
+    #game {
+        position: absolute;
+        height: 80%;
+        width: 65%;
+        left: 0;
+        top: 10%;
+        opacity: 0;
+        transform: translate3d(0,0,0);
     }
 }
 
